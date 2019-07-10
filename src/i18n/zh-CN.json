@@ -1,0 +1,10 @@
+{
+    "notebook":{
+        "header":"笔记本",
+        "list-header":"我的笔记本"
+    },
+    "action":{
+        "new":"新建",
+        "manage":"管理"
+    }
+}
