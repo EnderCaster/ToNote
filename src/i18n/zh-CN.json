@@ -6,5 +6,8 @@
     "action":{
         "new":"新建",
         "manage":"管理"
+    },
+    "msg":{
+        "modify-date":"修改日期"
     }
 }

@@ -2,11 +2,11 @@
   <Layout class="fullscreen">
     <Header>
       <img src="../images/logo.png" class="layout-logo" />
-      <Select class="layout-notebook-select">
+      <Select v-model="current_notebook" class="layout-notebook-select">
         <Option
           v-for="(notebook,index) in notebooks"
           :key="index"
-          :value="notebook.id"
+          :value="notebook.uuid"
         >{{notebook.name}}</Option>
       </Select>
     </Header>
@@ -16,8 +16,8 @@
           <MenuItem
             v-for="(partition,index) in partitions"
             :key="index"
-            :name="partition.name"
-            :to="{name:'page',params:{partition_name:partition.name,partition_id:partition.id}}"
+            :name="partition.uuid"
+            :to="{name:'page',params:{partition_name:partition.name,partition_uuid:partition.uuid}}"
           >{{partition.name}}</MenuItem>
         </Menu>
       </Sider>
@@ -32,29 +32,43 @@
 export default {
   data: function() {
     return {
-        current_notebook:"",
+      current_notebook: "",
       partitions: [
         {
-          id: "9ASD4F9WE4GD65",
+          uuid: "9ASD4F9WE4GD65",
           name: "分区名"
         }
       ],
       notebooks: [
         {
-          id: "AS8DF74A6F65SFA748S",
+          uuid: "AS8DF74A6F65SFA748S",
           name: "XXX的笔记本"
         }
       ]
     };
   },
   methods: {
-    handleSelect: function(index) {
-      console.log(this.partitions[index]);
+    initNotebooks: function() {
+      var _this = this;
+      axios.get("notebooks").then(function(resp) {
+        _this.notebooks = resp.data;
+        _this.current_notebook = _this.$route.params.notebook_uuid;
+      });
+    },
+    initPartitions:function(){
+      var _this = this;
+      axios.get("notebooks").then(function(resp) {
+        _this.partitions = resp.data;
+      });
+    },
+    handleChange:function(){
+      //切换笔记本
     }
   },
   mounted: function() {
     //console.log(this.$route)
-    this.current_notebook=this.$route.params.notebook_id    
+    this.initNotebooks();
+    this.initPartitions();
   }
 };
 </script>

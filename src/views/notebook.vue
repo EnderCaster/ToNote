@@ -33,7 +33,7 @@ export default {
     return {
       notebooks: [
         {
-          id: "AS8DF74A6F65SFA748S",
+          uuid: "AS8DF74A6F65SFA748S",
           name: "XXX的笔记本"
         }
       ]
@@ -44,11 +44,18 @@ export default {
           this.$router.push({
               name:"partition",
               params:{
-                  notebook_id:this.notebooks[index].id
+                  notebook_id:this.notebooks[index].uuid
               }
           })
       }
+  },
+  mounted:function(){
+    var _this=this;
+    axios.get('notebooks').then(function(resp){
+      _this.notebooks=resp.data;
+    })
   }
+  
 };
 </script>
 

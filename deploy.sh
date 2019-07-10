@@ -1,3 +1,8 @@
+#!/bin/bash
+if [ ! -d /d/serve_root/2note ]
+then 
+    mkdir -p /d/serve_root/2note
+fi
 rm -rf dist
 rm -f index_prod.html
 npm run build

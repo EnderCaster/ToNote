@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.base.config.js');
 const fs = require('fs');
-const Uglify=require("uglifyjs-webpack-plugin");
+const UglifyJsPlugin=require('uglifyjs-webpack-plugin3');
 
 fs.open('./src/config/env.js', 'w', function (err, fd) {
     const buf = 'export default "production";';
@@ -31,7 +31,7 @@ module.exports = merge(webpackBaseConfig, {
                 NODE_ENV: '"production"'
             }
         }),
-        // new Uglify(),
+        new UglifyJsPlugin(),
         // new webpack.optimize.UglifyJsPlugin({
         //     compress: {
         //         warnings: false

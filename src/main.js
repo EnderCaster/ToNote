@@ -6,7 +6,7 @@ import Util from './libs/util';
 import App from './app.vue';
 import 'iview/dist/styles/iview.css';
 import VueI18n from 'vue-i18n';
-
+import Axios from 'axios';
 
 Vue.use(VueRouter);
 Vue.use(iView);
@@ -20,6 +20,10 @@ const i18n=new VueI18n({
     locale:'zh',
     messages
 })
+//AXIOS
+Axios.defaults.baseURL = '//api.tonote.me/api/';
+// Axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+window.axios=Axios;
 
 // 路由配置
 const RouterConfig = {
