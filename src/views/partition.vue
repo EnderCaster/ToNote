@@ -22,7 +22,7 @@
         </Menu>
       </Sider>
       <Content>
-        <router-view />
+          <router-view />
       </Content>
     </Layout>
   </Layout>
@@ -34,16 +34,8 @@ export default {
     return {
       current_notebook: "",
       partitions: [
-        {
-          uuid: "9ASD4F9WE4GD65",
-          name: "分区名"
-        }
       ],
       notebooks: [
-        {
-          uuid: "AS8DF74A6F65SFA748S",
-          name: "XXX的笔记本"
-        }
       ]
     };
   },
@@ -55,13 +47,16 @@ export default {
         _this.current_notebook = _this.$route.params.notebook_uuid;
       });
     },
-    initPartitions:function(){
+    initPartitions: function() {
       var _this = this;
-      axios.get("notebooks").then(function(resp) {
+      var data = {
+        params: { parent: this.$route.params.notebook_uuid }
+      };
+      axios.get("partitions", data).then(function(resp) {
         _this.partitions = resp.data;
       });
     },
-    handleChange:function(){
+    handleChange: function() {
       //切换笔记本
     }
   },

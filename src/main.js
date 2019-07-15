@@ -7,6 +7,7 @@ import App from './app.vue';
 import 'iview/dist/styles/iview.css';
 import VueI18n from 'vue-i18n';
 import Axios from 'axios';
+import quillEditor from 'vue-quill-editor';
 
 Vue.use(VueRouter);
 Vue.use(iView);
@@ -24,6 +25,8 @@ const i18n=new VueI18n({
 Axios.defaults.baseURL = '//api.tonote.me/api/';
 // Axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 window.axios=Axios;
+//富文本编辑器
+Vue.use(quillEditor);
 
 // 路由配置
 const RouterConfig = {

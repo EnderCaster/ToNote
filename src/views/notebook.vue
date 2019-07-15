@@ -32,10 +32,6 @@ export default {
   data: function() {
     return {
       notebooks: [
-        {
-          uuid: "AS8DF74A6F65SFA748S",
-          name: "XXX的笔记本"
-        }
       ]
     };
   },
@@ -44,7 +40,7 @@ export default {
           this.$router.push({
               name:"partition",
               params:{
-                  notebook_id:this.notebooks[index].uuid
+                  notebook_uuid:this.notebooks[index].uuid
               }
           })
       }

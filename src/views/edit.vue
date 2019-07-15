@@ -2,26 +2,43 @@
   <div class="edit">
     <Row>
       <Col span="12">
-        <Input class="title" v-model="page.name" />
+        <Input class="title" v-model="page.title" />
         <hr />
       </Col>
-      <Col span="12"></Col>
+      <Col span="12">
+        <Button size="large" @click="handleSave">{{$t('action.save')}}</Button>
+      </Col>
     </Row>
-    <Row>{{$t('msg.modify-date')}}:{{formatDate(page.modify_date)}}</Row>
-    <Row>这里一会放一个富文本编辑器</Row>
+    <Row>{{$t('msg.modify-date')}}:{{page.updated_at}}</Row>
+    <Row>
+      <Col span="16">
+        <quill-editor
+          ref="myTextEditor"
+          v-model="page.content"
+          :config="editorOption"
+          @blur="onEditorBlur($event)"
+          @focus="onEditorFocus($event)"
+          @ready="onEditorReady($event)"
+        ></quill-editor>
+      </Col>
+      <Col span="2">
+      </Col>
+    </Row>
   </div>
 </template>
 
 <script>
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
 export default {
   data: function() {
     return {
-      page: {
-        id: "",
-        name: "测试页面",
-        content: "",
-        modify_date: 0
-      }
+      content: "<h1>Hello Happy World</h1>",
+      editorOption: {
+        // something config
+      },
+      page: {}
     };
   },
   methods: {
@@ -31,11 +48,33 @@ export default {
         date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
       );
     },
-    initThisPage:function(){
-      var _this=this;
-      axios.get('pages/'+_this.$route.params.page_uuid).then(function(resp){
-        _this.page=resp.data;
+    initThisPage: function() {
+      var _this = this;
+      axios.get("pages/" + _this.$route.params.page_uuid).then(function(resp) {
+        _this.page = resp.data;
       });
+    },
+    onEditorBlur(editor) {
+      // 同步草稿
+      // console.log('editor blur!', editor)
+    },
+    onEditorFocus(editor) {
+      // console.log('editor focus!', editor)
+    },
+    onEditorReady(editor) {
+      console.log("editor ready!");
+    },
+    onEditorChange({ editor, html, text }) {
+      // console.log('editor change!', editor, html, text)
+      // this.content = html
+    },
+    handleSave:function(){
+
+    }
+  },
+  watch: {
+    $route: function(to, from) {
+      this.initThisPage();
     }
   },
   mounted: function() {
@@ -46,9 +85,12 @@ export default {
 
 <style lang="less">
 .edit {
+  background-color: #fff;
   .title {
     .ivu-input.ivu-input-default {
       border: 1px solid transparent;
+      font-size: 14px;
+      font-weight: bold;
     }
   }
 }

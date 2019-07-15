@@ -5,9 +5,9 @@
         <MenuItem
           v-for="(page,index) in pages"
           :key="index"
-          :name="page.name"
-          :to="{name:'edit_field',params:{page_name:page.name,page_uuid:page.id}}"
-        >{{page.name}}</MenuItem>
+          :name="page.title"
+          :to="{name:'edit_field',params:{page_name:page.title,page_uuid:page.uuid}}"
+        >{{page.title}}</MenuItem>
       </Menu>
     </Sider>
     <Content>
@@ -21,22 +21,28 @@ export default {
   data: function() {
     return {
       pages: [
-        {
-          id: "A6D5F47WT1S6FG7",
-          name: "测试页面"
-        }
       ]
     };
   },
   methods: {
     initPages: function() {
       var _this = this;
-      axios.get("pages").then(function(resp) {
+      var data={
+        params:{
+          parent:this.$route.params.partition_uuid
+        }
+      };
+      axios.get("pages",data).then(function(resp) {
         _this.pages = resp.data;
       });
     }
   },
-  mounted: function() {
+  watch:{
+    '$route':function(to,from){
+       this.initPages();
+    }
+  },
+  mounted:function(){
     this.initPages();
   }
 };
