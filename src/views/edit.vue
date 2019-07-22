@@ -69,7 +69,14 @@ export default {
       // this.content = html
     },
     handleSave:function(){
-
+      var _this=this;
+      var data={
+        content:this.page.content,
+        title:this.page.title
+      }
+      axios.patch("pages/" + _this.$route.params.page_uuid,data).then(function(resp){
+        _this.$Message.success({content:resp.data.message});
+      })
     }
   },
   watch: {

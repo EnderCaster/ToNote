@@ -2,7 +2,7 @@
   <Layout class="fullscreen">
     <Header>
       <img src="../images/logo.png" class="layout-logo" />
-      <Select v-model="current_notebook" class="layout-notebook-select">
+      <Select v-model="current_notebook" class="layout-notebook-select" @on-change="handleChange">
         <Option
           v-for="(notebook,index) in notebooks"
           :key="index"
@@ -56,8 +56,13 @@ export default {
         _this.partitions = resp.data;
       });
     },
-    handleChange: function() {
-      //切换笔记本
+    handleChange: function(value) {
+      this.$router.push({
+              name:"partition",
+              params:{
+                  notebook_uuid:value
+              }
+          })
     }
   },
   mounted: function() {

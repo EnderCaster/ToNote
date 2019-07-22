@@ -42,7 +42,13 @@ export default {
               params:{
                   notebook_uuid:this.notebooks[index].uuid
               }
-          })
+          });
+      },
+      showAddModal:function(){
+
+      },
+      handleAdd:function(){
+
       }
   },
   mounted:function(){

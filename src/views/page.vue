@@ -2,12 +2,17 @@
   <Layout>
     <Sider>
       <Menu width="auto">
-        <MenuItem
-          v-for="(page,index) in pages"
-          :key="index"
-          :name="page.title"
-          :to="{name:'edit_field',params:{page_name:page.title,page_uuid:page.uuid}}"
-        >{{page.title}}</MenuItem>
+        <Row type="flex" justify="center" align="middle" v-for="(page,index) in pages" :key="index">
+          <Col span="16">
+            <MenuItem
+              :name="page.title"
+              :to="{name:'edit_field',params:{page_name:page.title,page_uuid:page.uuid}}"
+            >{{page.title}}</MenuItem>
+          </Col>
+          <Col span="8">
+            <Button @click="handleDelete(page.uuid)"><Icon type="md-trash"/></Button>
+          </Col>
+        </Row>
       </Menu>
     </Sider>
     <Content>
@@ -20,29 +25,31 @@
 export default {
   data: function() {
     return {
-      pages: [
-      ]
+      pages: []
     };
   },
   methods: {
     initPages: function() {
       var _this = this;
-      var data={
-        params:{
-          parent:this.$route.params.partition_uuid
+      var data = {
+        params: {
+          parent: this.$route.params.partition_uuid
         }
       };
-      axios.get("pages",data).then(function(resp) {
+      axios.get("pages", data).then(function(resp) {
         _this.pages = resp.data;
       });
+    },
+    handleDelete: function(uuid) {
+      console.log(uuid);
     }
   },
-  watch:{
-    '$route':function(to,from){
-       this.initPages();
+  watch: {
+    $route: function(to, from) {
+      this.initPages();
     }
   },
-  mounted:function(){
+  mounted: function() {
     this.initPages();
   }
 };
