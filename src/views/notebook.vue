@@ -39,7 +39,7 @@
       <Row type="flex" justify="center" align="middle">
           <Col span="4">{{$t('notebook.label.name')}}</Col>
           <Col span="20">
-            <Input v-model="notebook.title" />
+            <Input v-model="notebook.name" />
           </Col>
           
         </Row>
@@ -57,7 +57,7 @@ export default {
     return {
       notebooks: [],
       is_show_add_modal: false,
-      notebook:{},
+      notebook:{name:""},
       is_show_action:false
     };
   },
@@ -81,8 +81,7 @@ export default {
     },
     handleAdd: function() {
       var _this = this;
-      var data = {};
-      axios.post("notebooks", data).then(function(resp) {
+      axios.post("notebooks", this.notebook).then(function(resp) {
         _this.getNotebooks();
         _this.is_show_add_modal=false;
         _this.notebook={};
