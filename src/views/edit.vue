@@ -75,7 +75,7 @@ export default {
         title:this.page.title
       }
       axios.patch("pages/" + _this.$route.params.page_uuid,data).then(function(resp){
-        _this.$Message.success({content:resp.data.message});
+        _this.$Message.success({content:_this.$t('msg.operation-success')});
       })
     }
   },

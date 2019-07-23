@@ -1,7 +1,23 @@
 {
     "notebook":{
         "header":"笔记本",
-        "list-header":"我的笔记本"
+        "list-header":"我的笔记本",
+        "add-title":"新建笔记本",
+        "label":{
+            "name":"笔记本名称"
+        }
+    },
+    "partition":{
+        "add-title":"新建分区",
+        "label":{
+            "name":"分区名称"
+        }
+    },
+    "page":{
+        "add-title":"新建页面",
+        "label":{
+            "name":"页面名称"
+        }
     },
     "action":{
         "new":"新建",
@@ -9,6 +25,7 @@
         "save":"保存"
     },
     "msg":{
-        "modify-date":"修改日期"
+        "modify-date":"修改日期",
+        "operation-success":"操作成功"
     }
 }
