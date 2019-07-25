@@ -94,9 +94,15 @@ export default {
         _this.getNotebooks();
         _this.$Message.success({content:_this.$t('msg.operation-success')});
       })
+    },
+    checkLogin:function(){
+      return axios.defaults.headers.common['Authorization'];
     }
   },
   mounted: function() {
+    if(!this.checkLogin()){
+      return this.$router.push({name:"login"});
+    }
     this.getNotebooks();
   }
 };

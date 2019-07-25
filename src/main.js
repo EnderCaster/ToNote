@@ -22,7 +22,7 @@ const i18n=new VueI18n({
     messages
 })
 //AXIOS
-Axios.defaults.baseURL = '//api.tonote.me/api/';
+Axios.defaults.baseURL = '//api.tonote.me/';
 // Axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 window.axios=Axios;
 //富文本编辑器

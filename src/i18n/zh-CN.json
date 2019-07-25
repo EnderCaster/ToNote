@@ -1,4 +1,12 @@
 {
+    "login":{
+        "title":"请登录",
+        "label":{
+            "username":"用户名",
+            "password":"密码",
+            "login":"登录"
+        }
+    },
     "notebook":{
         "header":"笔记本",
         "list-header":"我的笔记本",
