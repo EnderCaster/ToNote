@@ -30,10 +30,12 @@
     "action":{
         "new":"新建",
         "manage":"管理",
-        "save":"保存"
+        "save":"保存",
+        "logout":"退出"
     },
     "msg":{
         "modify-date":"修改日期",
-        "operation-success":"操作成功"
+        "operation-success":"操作成功",
+        "login-failed":"登录失败，请检查用户名或密码"
     }
 }

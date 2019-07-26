@@ -28,6 +28,10 @@ window.axios=Axios;
 //富文本编辑器
 Vue.use(quillEditor);
 
+Vue.prototype.checkLogin = function() {
+    return axios.defaults.headers.common["Authorization"];
+  }
+
 // 路由配置
 const RouterConfig = {
     // mode: 'history',

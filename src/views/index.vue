@@ -31,13 +31,16 @@ export default {
     },
     methods:{
         handleLogin:function(){
+          var _this=this;
             axios.post('login',this.user).then(function(resp){
-                console.log(resp);
                 axios.defaults.headers.common['Authorization']=resp.data.token_type+" "+resp.data.access_token;
-            })
+                _this.$router.push({name:"notebook"});
+            }).catch(function(error){
+              _this.$Message.error({content:_this.$t('msg.login-failed')});
+            });
         },
         checkLogin:function(){
-        return axios.defaults.headers.common['Authorization'];
+          return axios.defaults.headers.common['Authorization'];
         }
     },
     mounted:function(){

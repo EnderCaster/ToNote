@@ -9,6 +9,7 @@
           :value="notebook.uuid"
         >{{notebook.name}}</Option>
       </Select>
+      <UserAction/>
     </Header>
     <Layout>
       <Sider>
@@ -63,7 +64,9 @@
 </template>
 
 <script>
+import UserAction from '../components/user_action';
 export default {
+  
   data: function() {
     return {
       current_notebook: "",
@@ -75,6 +78,9 @@ export default {
         name: ""
       }
     };
+  },
+  components:{
+    UserAction,
   },
   methods: {
     initNotebooks: function() {
@@ -124,6 +130,9 @@ export default {
         });
         _this.handleChange(_this.$route.params.notebook_uuid);
       });
+    },
+    checkLogin:function(){
+      return axios.defaults.headers.common['Authorization'];
     }
   },
   watch: {
@@ -133,6 +142,9 @@ export default {
     }
   },
   mounted: function() {
+    if(!this.checkLogin()){
+      return this.$router.push({name:"login"});
+    }
     this.initNotebooks();
     this.initPartitions();
   }
