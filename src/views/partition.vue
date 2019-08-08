@@ -130,9 +130,6 @@ export default {
         });
         _this.handleChange(_this.$route.params.notebook_uuid);
       });
-    },
-    checkLogin:function(){
-      return axios.defaults.headers.common['Authorization'];
     }
   },
   watch: {

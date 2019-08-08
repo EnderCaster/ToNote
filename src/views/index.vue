@@ -12,6 +12,11 @@
                 <Input  v-model="user.password" type="password"/>
             </FormItem>
             <FormItem>
+              <Checkbox v-model="remember_me" >
+                <span>{{$t('login.label.remember-me')}}</span>
+              </Checkbox>
+            </FormItem>
+            <FormItem>
                 <Button type="primary" @click="handleLogin" long>{{$t('login.label.login')}}</Button>
             </FormItem>
         </Form>
@@ -26,7 +31,8 @@ export default {
         return {
             user:{
 
-            }
+            },
+            remember_me:false
         }
     },
     methods:{
@@ -34,13 +40,13 @@ export default {
           var _this=this;
             axios.post('login',this.user).then(function(resp){
                 axios.defaults.headers.common['Authorization']=resp.data.token_type+" "+resp.data.access_token;
+                if(this.remember_me){
+                  localStorage.setItem('Authorization',axios.defaults.headers.common['Authorization']);
+                }
                 _this.$router.push({name:"notebook"});
             }).catch(function(error){
               _this.$Message.error({content:_this.$t('msg.login-failed')});
             });
-        },
-        checkLogin:function(){
-          return axios.defaults.headers.common['Authorization'];
         }
     },
     mounted:function(){

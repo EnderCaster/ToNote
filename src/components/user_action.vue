@@ -11,6 +11,7 @@ export default {
   },
   methods: {
     handleLogout: function() {
+      localStorage.clear();
       axios.defaults.headers.common["Authorization"] = undefined;
       this.$router.push("/login");
     }

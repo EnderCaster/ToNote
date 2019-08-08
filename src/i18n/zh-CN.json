@@ -4,7 +4,8 @@
         "label":{
             "username":"用户名",
             "password":"密码",
-            "login":"登录"
+            "login":"登录",
+            "remember-me":"记住我"
         }
     },
     "notebook":{

@@ -14,23 +14,26 @@ Vue.use(iView);
 
 // 国际化配置
 Vue.use(VueI18n);
-const messages={
-    'zh':require('./i18n/zh-CN.json')
+const messages = {
+    'zh': require('./i18n/zh-CN.json')
 }
-const i18n=new VueI18n({
-    locale:'zh',
+const i18n = new VueI18n({
+    locale: 'zh',
     messages
 })
 //AXIOS
 Axios.defaults.baseURL = '//api.to-note.endercaster.com/';
 // Axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-window.axios=Axios;
+window.axios = Axios;
 //富文本编辑器
 Vue.use(quillEditor);
 
-Vue.prototype.checkLogin = function() {
+Vue.prototype.checkLogin = function () {
+    if (localStorage.getItem['Authorization']) {
+        axios.defaults.headers.common["Authorization"] = localStorage.getItem['Authorization'];
+    }
     return axios.defaults.headers.common["Authorization"];
-  }
+}
 
 // 路由配置
 const RouterConfig = {
