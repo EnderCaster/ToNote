@@ -15,10 +15,7 @@
         <quill-editor
           ref="myTextEditor"
           v-model="page.content"
-          :config="editorOption"
-          @blur="onEditorBlur($event)"
-          @focus="onEditorFocus($event)"
-          @ready="onEditorReady($event)"
+          :options="editorOption"
         ></quill-editor>
       </Col>
       <Col span="2">
@@ -31,13 +28,14 @@
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
+import quillConfig from '../libs/quill-config';
 export default {
+  components:{
+    quillConfig
+  },
   data: function() {
     return {
-      content: "<h1>Hello Happy World</h1>",
-      editorOption: {
-        // something config
-      },
+      editorOption: quillConfig,
       page: {}
     };
   },
@@ -53,20 +51,6 @@ export default {
       axios.get("pages/" + _this.$route.params.page_uuid).then(function(resp) {
         _this.page = resp.data;
       });
-    },
-    onEditorBlur(editor) {
-      // 同步草稿
-      // console.log('editor blur!', editor)
-    },
-    onEditorFocus(editor) {
-      // console.log('editor focus!', editor)
-    },
-    onEditorReady(editor) {
-      console.log("editor ready!");
-    },
-    onEditorChange({ editor, html, text }) {
-      // console.log('editor change!', editor, html, text)
-      // this.content = html
     },
     handleSave:function(){
       var _this=this;

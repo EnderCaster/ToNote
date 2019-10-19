@@ -40,7 +40,7 @@ export default {
           var _this=this;
             axios.post('login',this.user).then(function(resp){
                 axios.defaults.headers.common['Authorization']=resp.data.token_type+" "+resp.data.access_token;
-                if(this.remember_me){
+                if(_this.remember_me){
                   localStorage.setItem('Authorization',axios.defaults.headers.common['Authorization']);
                 }
                 _this.$router.push({name:"notebook"});
