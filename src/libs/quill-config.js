@@ -44,13 +44,13 @@ const handlers = {
                 // 创建formData
                 var formData = new FormData();
                 formData.append(uploadConfig.name, fileInput.files[0]);
-                // TODO 图片上传 需要改成axios
+                // 图片上传
                 axios.post('/file/upload',formData,{
                     headers:{"Content-Type":"multipart/form-data"}
                 }).then(function(resp){
                     let length = self.quill.getSelection(true).index;
                     //这里很重要，你图片上传成功后，img的src需要在这里添加，res.path就是你服务器返回的图片链接。            
-                    self.quill.insertEmbed(length, 'image', resp.data.url);
+                    self.quill.insertEmbed(length, 'image', axios.defaults.baseURL+"file/"+resp.data.url);
                     self.quill.setSelection(length + 1)
                     fileInput.value = '';
                 });

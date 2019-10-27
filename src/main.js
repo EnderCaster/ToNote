@@ -23,7 +23,6 @@ const i18n = new VueI18n({
 })
 //AXIOS
 Axios.defaults.baseURL = '//api.to-note.endercaster.com/';
-// Axios.defaults.baseURL = '//api.endercaster.lan/';
 // Axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 window.axios = Axios;
 //富文本编辑器
