@@ -1,10 +1,10 @@
 import Vue from 'vue';
-import iView from 'iview';
+import iView from 'view-design';
 import VueRouter from 'vue-router';
 import Routers from './router';
 import Util from './libs/util';
 import App from './app.vue';
-import 'iview/dist/styles/iview.css';
+import 'view-design/dist/styles/iview.css';
 import VueI18n from 'vue-i18n';
 import Axios from 'axios';
 import quillEditor from 'vue-quill-editor';
