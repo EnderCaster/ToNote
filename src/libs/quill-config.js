@@ -11,16 +11,16 @@ const uploadConfig = {
 const toolOptions = [
     ['bold', 'italic', 'underline', 'strike'],
     ['blockquote', 'code-block'],
-    [{'header': 1}, {'header': 2}],
-    [{'list': 'ordered'}, {'list': 'bullet'}],
-    [{'script': 'sub'}, {'script': 'super'}],
-    [{'indent': '-1'}, {'indent': '+1'}],
-    [{'direction': 'rtl'}],
-    [{'size': ['small', false, 'large', 'huge']}],
-    [{'header': [1, 2, 3, 4, 5, 6, false]}],
-    [{'color': []}, {'background': []}],
-    [{'font': []}],
-    [{'align': []}],
+    [{ 'header': 1 }, { 'header': 2 }],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+    [{ 'script': 'sub' }, { 'script': 'super' }],
+    [{ 'indent': '-1' }, { 'indent': '+1' }],
+    [{ 'direction': 'rtl' }],
+    [{ 'size': ['small', false, 'large', 'huge'] }],
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'color': [] }, { 'background': [] }],
+    [{ 'font': [] }],
+    [{ 'align': [] }],
     ['clean'],
     ['link', 'image']//, 'video']
 ];
@@ -45,16 +45,20 @@ const handlers = {
                 var formData = new FormData();
                 formData.append(uploadConfig.name, fileInput.files[0]);
                 // 图片上传
-                axios.post('/file/upload',formData,{
-                    headers:{"Content-Type":"multipart/form-data"}
-                }).then(function(resp){
+                axios.post('/file/upload', formData, {
+                    headers: { "Content-Type": "multipart/form-data" }
+                }).then(function (resp) {
                     let length = self.quill.getSelection(true).index;
+                    let base_url = axios.defaults.baseURL;
+                    if (!base_url.endsWith('/')) {
+                        base_url += "/";
+                    }
                     //这里很重要，你图片上传成功后，img的src需要在这里添加，res.path就是你服务器返回的图片链接。            
-                    self.quill.insertEmbed(length, 'image', axios.defaults.baseURL+"file/"+resp.data.url);
+                    self.quill.insertEmbed(length, 'image', base_url + "file/" + resp.data.data.url);
                     self.quill.setSelection(length + 1)
                     fileInput.value = '';
                 });
-                
+
             });
             this.container.appendChild(fileInput);
         }

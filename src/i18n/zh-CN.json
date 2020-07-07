@@ -1,42 +1,60 @@
 {
-    "login":{
-        "title":"请登录",
-        "label":{
-            "username":"用户名",
-            "password":"密码",
-            "login":"登录",
-            "remember-me":"记住我"
+    "login": {
+        "title": "请登录",
+        "label": {
+            "username": "用户名",
+            "password": "密码",
+            "login": "登录",
+            "remember-me": "记住我",
+            "to-register": "还没有账号？去注册>>"
         }
     },
-    "notebook":{
-        "header":"笔记本",
-        "list-header":"我的笔记本",
-        "add-title":"新建笔记本",
-        "label":{
-            "name":"笔记本名称"
+    "register": {
+        "title": "用户注册",
+        "label": {
+            "username": "用户名",
+            "email": "邮箱",
+            "password": "密码",
+            "check-password": "确认密码",
+            "register": "注册",
+            "back-to-login": "返回登录>>"
         }
     },
-    "partition":{
-        "add-title":"新建分区",
-        "label":{
-            "name":"分区名称"
+    "notebook": {
+        "header": "笔记本",
+        "list-header": "我的笔记本",
+        "add-title": "新建笔记本",
+        "label": {
+            "name": "笔记本名称"
         }
     },
-    "page":{
-        "add-title":"新建页面",
-        "label":{
-            "name":"页面名称"
+    "partition": {
+        "add-title": "新建分区",
+        "label": {
+            "name": "分区名称"
         }
     },
-    "action":{
-        "new":"新建",
-        "manage":"管理",
-        "save":"保存",
-        "logout":"退出"
+    "page": {
+        "add-title": "新建页面",
+        "label": {
+            "name": "页面名称"
+        }
     },
-    "msg":{
-        "modify-date":"修改日期",
-        "operation-success":"操作成功",
-        "login-failed":"登录失败，请检查用户名或密码"
+    "action": {
+        "new": "新建",
+        "manage": "管理",
+        "save": "保存",
+        "logout": "退出"
+    },
+    "msg": {
+        "modify-date": "修改日期",
+        "operation-success": "操作成功",
+        "login-failed": "登录失败，请检查用户名或密码",
+        "register-failed": "注册失败",
+        "save-success": "保存成功",
+        "auto-save-at": "自动保存于"
+    },
+    "system": {
+        "passport_token": "laravel_token"
     }
 }

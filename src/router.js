@@ -5,6 +5,11 @@ const routers = [
         component: (resolve) => require(['./views/index.vue'], resolve)
     },
     {
+        path: '/register',
+        name:'register',
+        component: (resolve) => require(['./views/register.vue'], resolve)
+    },
+    {
         path: '/',
         name: 'notebook',
         component: (resolve) => require(['./views/notebook.vue'], resolve)

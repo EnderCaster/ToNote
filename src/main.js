@@ -9,6 +9,8 @@ import VueI18n from 'vue-i18n';
 import Axios from 'axios';
 import quillEditor from 'vue-quill-editor';
 
+window.site_config.APP_URL = "to-note.endercaster.lan"
+window.site_config.API_URL = "api.to-note.endercaster.lan"
 Vue.use(VueRouter);
 Vue.use(iView);
 
@@ -22,15 +24,15 @@ const i18n = new VueI18n({
     messages
 })
 //AXIOS
-Axios.defaults.baseURL = '//api.to-note.endercaster.com/';
-// Axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+Axios.defaults.baseURL = "//" + window.site_config.API_URL;
+
 window.axios = Axios;
 //富文本编辑器
 Vue.use(quillEditor);
 
 Vue.prototype.checkLogin = function () {
-    if (localStorage.getItem['Authorization']) {
-        axios.defaults.headers.common["Authorization"] = localStorage.getItem['Authorization'];
+    if (localStorage.getItem('Authorization')) {
+        axios.defaults.headers.common["Authorization"] = localStorage.getItem('Authorization');
     }
     return axios.defaults.headers.common["Authorization"];
 }

@@ -3,28 +3,30 @@
         <ECHeader />
         <Row type="flex" justify="center" align="middle">
             <Card class="login-wrapper">
-                <p slot="title">{{$t('login.title')}}</p>
+                <p slot="title">{{$t('register.title')}}</p>
                 <Form label-position="top">
-                    <FormItem :label="$t('login.label.username')">
+                    <FormItem :label="$t('register.label.username')">
                         <Input v-model="user.username" />
                     </FormItem>
-                    <FormItem :label="$t('login.label.password')">
+                    <FormItem :label="$t('register.label.password')">
                         <Input v-model="user.password" type="password" />
                     </FormItem>
-                    <FormItem>
-                        <Checkbox v-model="remember_me">
-                            <span>{{$t('login.label.remember-me')}}</span>
-                        </Checkbox>
+                    <FormItem :label="$t('register.label.check-password')">
+                        <Input v-model="user.password_confirmation" type="password" />
                     </FormItem>
                     <FormItem>
-                        <Button type="primary" @click="handleLogin" long>{{$t('login.label.login')}}</Button>
+                        <Button
+                            type="primary"
+                            @click="handleRegister"
+                            long
+                        >{{$t('register.label.register')}}</Button>
                     </FormItem>
                     <FormItem>
                         <span>
                             <a
                                 class="pull-right"
-                                @click="goToRegister"
-                            >{{$t('login.label.to-register')}}</a>
+                                @click="backToLogin"
+                            >{{$t('register.label.back-to-login')}}</a>
                         </span>
                     </FormItem>
                 </Form>
@@ -46,38 +48,21 @@ export default {
         ECHeader
     },
     methods: {
-        handleLogin: function() {
-            console.log(this.base_url);
+        handleRegister: function() {
             var _this = this;
             axios
-                .post("login", this.user)
+                .post("register", this.user)
                 .then(function(resp) {
-                    axios.defaults.headers.common["Authorization"] =
-                        resp.data.data.token_type +
-                        " " +
-                        resp.data.data.access_token;
-                    document.cookie =
-                        _this.$t("system.passport_token") +
-                        "=" +
-                        resp.data.data.access_token +
-                        ";path=/;domain=." +
-                        window.site_config.APP_URL;
-                    if (_this.remember_me) {
-                        localStorage.setItem(
-                            "Authorization",
-                            axios.defaults.headers.common["Authorization"]
-                        );
-                    }
-                    _this.$router.push({ name: "notebook" });
+                    _this.$router.push({ name: "login" });
                 })
                 .catch(function(error) {
                     _this.$Message.error({
-                        content: _this.$t("msg.login-failed")
+                        content: _this.$t("msg.register-failed")
                     });
                 });
         },
-        goToRegister: function() {
-            return this.$router.push({ name: "register" });
+        backToLogin: function() {
+            return this.$router.push({ name: "login" });
         }
     },
     mounted: function() {
