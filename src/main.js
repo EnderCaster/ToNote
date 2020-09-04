@@ -9,8 +9,11 @@ import VueI18n from 'vue-i18n';
 import Axios from 'axios';
 import quillEditor from 'vue-quill-editor';
 
-window.site_config.APP_URL = "to-note.endercaster.lan"
-window.site_config.API_URL = "api.to-note.endercaster.lan"
+window.site_config = {
+    APP_URL: "to-note.endercaster.lan",
+    API_URL: "api.to-note.endercaster.lan"
+}
+
 Vue.use(VueRouter);
 Vue.use(iView);
 
